@@ -9,9 +9,9 @@ using namespace std;
 
 struct information
 {
-	uint64_t fullkey[2];//完整特征值
-	uint16_t location = 111;//存储位置
-	//uint64_t count;//频率
+	uint64_t fullkey[2];
+	uint16_t location = 111;
+	//uint64_t count;
 };
 class containers
 {
@@ -26,12 +26,12 @@ public:
 	int successful_num = 0;
 
 	set<uint32_t> candidate;
-	unordered_map<uint32_t, information> full_index;//完整索引
-	unordered_map<uint32_t, uint32_t>sub_index1;//四个子索引
+	unordered_map<uint32_t, information> full_index;
+	unordered_map<uint32_t, uint32_t>sub_index1;
 	unordered_map<uint32_t, uint32_t>sub_index2;
 	unordered_map<uint32_t, uint32_t>sub_index3;
 	unordered_map<uint32_t, uint32_t>sub_index4;
-	vector<uint32_t>C_0_TO_subhammdis;//用于与特征段做异或运算的所有数字的容器
+	vector<uint32_t>C_0_TO_subhammdis;
 	set<pair<uint64_t, uint64_t>>test_pool;
 	containers();
 	void prepare();
