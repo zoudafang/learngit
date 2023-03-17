@@ -85,8 +85,6 @@ void containers::initialize()
 }
 void containers::find_sim(uint64_t query[])
 {
-	
-	//Í¨¹ýÎ»ÔËËã£¬½ØÈ¡ÌØÕ÷Öµ¶Î
 	uint64_t tmpquery1 = query[0];
 	uint64_t tmpquery2 = query[1];
 	uint32_t sub1 = tmpquery1 & 0xffffffff;
@@ -96,7 +94,6 @@ void containers::find_sim(uint64_t query[])
 	tmpquery2 = tmpquery2 >> 32;
 	uint32_t sub4 = tmpquery2 & 0xffffffff;
 
-	//ÈÝÆ÷µÄµü´úÆ÷
 	std::unordered_map<uint32_t, uint32_t>::const_iterator got1;
 	std::unordered_map<uint32_t, uint32_t>::const_iterator got2;
 	std::unordered_map<uint32_t, uint32_t>::const_iterator got3;
@@ -104,21 +101,18 @@ void containers::find_sim(uint64_t query[])
 	std::set<uint32_t>::iterator it;
 	std::vector<uint32_t>::iterator its;
 
-	//Ñ°ÕÒºòÑ¡ÌØÕ÷¶Î
 	uint32_t tmpsub1, tmpsub2, tmpsub3, tmpsub4 = 0;
 	for (its = C_0_TO_subhammdis.begin(); its != C_0_TO_subhammdis.end(); its++)
 	{
-		//×öÒì»òÔËËã£¬ÕÒ³öÖ»ÓÐÏà¹ØÎ»²»Í¬µÄ¿ÉÄÜºòÑ¡Öµ
 		tmpsub1 = sub1 ^ *its;
 		tmpsub2 = sub2 ^ *its;
 		tmpsub3 = sub3 ^ *its;
 		tmpsub4 = sub4 ^ *its;
-
-		//·Ö±ðÔÚ4¸ö×ÓË÷ÒýÖÐ²éÕÒºòÑ¡Öµ
+		
 		got1 = sub_index1.find(tmpsub1);
-		if (got1 != sub_index1.end())//¼ì²éÕâ¸ö¿ÉÄÜµÄºòÑ¡ÖµÊÇ·ñ´æÔÚ
+		if (got1 != sub_index1.end())
 		{
-			it = candidate.find(got1->second);//¼ì²é±êÊ¶·ûÔÚºòÑ¡³ØÖÐÊÇ·ñÒÑ¾­´æÔÚ
+			it = candidate.find(got1->second);
 			if (it == candidate.end())
 				candidate.insert(got1->second);
 		}
@@ -145,7 +139,6 @@ void containers::find_sim(uint64_t query[])
 		}
 	}
 
-	//¶ÔºòÑ¡ÌØÕ÷¶Î½øÐÐÉ¸Ñ¡
 	uint64_t cmp_hamm[2] = { 0 };
 	int count = 0;
 
@@ -157,7 +150,6 @@ void containers::find_sim(uint64_t query[])
 		{
 			cmp_hamm[0] = query[0] ^ (got_out->second.fullkey[0]);
 			cmp_hamm[1] = query[1] ^ (got_out->second.fullkey[1]);
-			//Òì»òºó£¬Í³¼Æ²»Í¬Î»µÄ¸öÊý
 			count = 0;
 			while (cmp_hamm[0]) {
 				count += cmp_hamm[0] & 1;
@@ -204,8 +196,8 @@ void containers::test()
 		m++;
 	}
 	clock_t endTime = std::clock();
-	double costTime = double(endTime - startTime) / CLOCKS_PER_SEC; //µ¥Î»Ãë
-	cout << "ÍêÕûË÷ÒýÌõÄ¿Îª£º" << initialize_size << endl;
-	cout << "²éÑ¯ÊýÄ¿Îª£º" << test_size << endl;
-	cout << "³ÌÐòºÄÊ±" << costTime << "Ãë£¡" << endl;//²éÑ¯×ÜºÄÊ±
+	double costTime = double(endTime - startTime) / CLOCKS_PER_SEC; 
+	cout << "The full index entry isï¼š" << initialize_size << endl;
+	cout << "The number of queries isï¼š" << test_size << endl;
+	cout << "The program takes " << costTime << " seconds!" << endl;
 }
